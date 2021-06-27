@@ -24,5 +24,6 @@ public class CrystalScript : MonoBehaviour
 
         Active = false;
 
+        FindObjectOfType<GameControler>().UpdateCrystalCounterText();
     }
 }

@@ -10,16 +10,16 @@ public class GameControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateCrystalCounterText();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateCrystalCounterText();
+        
     }
 
-    void UpdateCrystalCounterText()
+    public void UpdateCrystalCounterText()
     {
         var Crystals = FindObjectsOfType<CrystalScript>();
 
