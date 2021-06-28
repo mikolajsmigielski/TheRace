@@ -9,6 +9,8 @@ public class GameControler : MonoBehaviour
     public Text CrystalCounterText;
     public Text CountDownText;
     public Text EndGameText;
+    public AudioClip GameWinSound;
+    public AudioClip GameLooseSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +81,10 @@ public class GameControler : MonoBehaviour
         SetIfSphereCanMove(false);
         EndGameText.enabled = true;
         EndGameText.text = win ? "WIN" : "LOOSE";
+
+        var audioSource = GetComponent<AudioSource>();
+        audioSource.clip = win ? GameWinSound : GameLooseSound;
+        audioSource.Play();
 
         yield return new WaitForSeconds(3f);
         Debug.Log("Game Over");
