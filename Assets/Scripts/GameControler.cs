@@ -28,7 +28,7 @@ public class GameControler : MonoBehaviour
     IEnumerator CountDownCoroutine()
     {
         CountDownText.enabled = true;
-        FindObjectOfType<Sphere>().CanMove = false;
+        SetIfSphereCanMove(false);
 
         for (int i = 5; i > 0; i--)
         {
@@ -62,10 +62,26 @@ public class GameControler : MonoBehaviour
             return;
         EndGame(true);
     }
+    void SetIfSphereCanMove(bool canMove)
+    {
+        var sphere = FindObjectOfType<Sphere>();
+        sphere.CanMove = canMove;
+        sphere.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+    }
     public void EndGame(bool win)
     {
+        StartCoroutine(EndofGameCorutine(win));
+
+    }
+    IEnumerator EndofGameCorutine(bool win)
+    {
+        SetIfSphereCanMove(false);
         EndGameText.enabled = true;
         EndGameText.text = win ? "WIN" : "LOOSE";
+
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Game Over");
+        Application.Quit();
     }
 }
